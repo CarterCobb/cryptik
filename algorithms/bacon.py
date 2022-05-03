@@ -61,7 +61,7 @@ class NewBacon(Cryptark):
 
     def decode(self, message: str) -> str:
         message = ''.join(filter(str.isalnum, message.replace(' ', '')))
-        if len(message) % 5 != 0: log.general('Warning: message not divisible by 5; will be truncated.')
+        if len(message) % 5 != 0: log.warn('Message not divisible by 5; will be truncated.')
         log.general(re.findall('.....', message))
         pre_ascii = [int(v, 2) for v in [''.join(f) for f in [['0' if ord(l) > 90 else '1' for l in c] for c in re.findall('.....', message)]]]
         log.general([f"{'0' * (5 - len(bin(i).replace('0b', '')))}{bin(i).replace('0b', '')}" for i in pre_ascii])
