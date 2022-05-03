@@ -19,6 +19,7 @@ class Bacon(Cryptark):
             @param: `encode_args[0]` = the string to encode the `message` into. e.g. "did somebody say bacon? there's nothing more delicious"
             @returns: from example: "dIdsOmEbodySaYbaCoNthEResnOThInGMoReDEliciOus"
         """
+        log.info(f'IN: {message}')
         message = ''.join(filter(str.isalnum, message)).upper()
         encode_args[0] = ''.join(filter(str.isalnum, encode_args[0])).lower()
         if encode_args[0] is None: encode_args[0] = ''
@@ -31,6 +32,7 @@ class Bacon(Cryptark):
         return ''.join([hide_str[i] if binary[i] != '1' else hide_str[i].upper() for i in range(len(binary))])
 
     def decode(self, message: str) -> str:
+        log.info(f'IN: {message}')
         message = ''.join(filter(str.isalnum, message))
         if len(message) % 5 != 0: log.warn('Message not divisible by 5; will be truncated.')
         log.general(re.findall('.....', message))
@@ -51,6 +53,7 @@ class NewBacon(Cryptark):
             @param: `encode_args[0]` = the string to encode the `message` into. e.g. "did somebody say bacon? there's nothing more delicious"
             @returns: from example: "dIdSomEbodySaYBaCoNThEReSnOTHinGMOreDElIciOus"
         """
+        log.info(f'IN: {message}')
         message = ''.join(filter(str.isalnum, message)).upper()
         encode_args[0] = ''.join(filter(str.isalnum, encode_args[0])).lower()
         if encode_args[0] is None: encode_args[0] = ''
@@ -63,6 +66,7 @@ class NewBacon(Cryptark):
         return ''.join([hide_str[i] if binary[i] != '1' else hide_str[i].upper() for i in range(len(binary))])
 
     def decode(self, message: str) -> str:
+        log.info(f'IN: {message}')
         message = ''.join(filter(str.isalnum, message))
         if len(message) % 5 != 0: log.warn('Message not divisible by 5; will be truncated.')
         log.general(re.findall('.....', message))
