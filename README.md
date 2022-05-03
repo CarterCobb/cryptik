@@ -16,7 +16,7 @@ The syntax is the same for each algrithm. It is subject to change as more cypher
 ```shell
 usage: program.py [-h] [-a ALGORITHM] [-e] [-d] [-m MESSAGE] ...
 
-Cryptik cryptography Helper
+Cryptik Cryptography Helper
 
 positional arguments:
   args

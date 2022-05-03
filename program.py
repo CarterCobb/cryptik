@@ -28,7 +28,7 @@ class Criptak:
 
     def __init__(self):
         log.art(text2art('Cryptik  Cryptography  Helper', font='tarty1'))
-        parser = argparse.ArgumentParser(description='Cryptik cryptography Helper')
+        parser = argparse.ArgumentParser(description='Cryptik Cryptography Helper')
         parser.add_argument('-a', '--algo', dest='algorithm', default=None, type=str, help='Algoritm to use. e.g. bacon')
         parser.add_argument('-e', '--encode', dest='encode', default=None, action='store_true', help='Set wether the program encodes the message. default: False')
         parser.add_argument('-d', '--decode', dest='decode', default=None, action='store_true', help='Set wether the program decodes the message')
