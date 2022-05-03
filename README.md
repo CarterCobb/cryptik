@@ -11,7 +11,7 @@ This is a simple cryptography encoder and decoder that will ahve various algorit
 
 ## Usage
 
-The syntax is the same for each algrithm. It is subject to change as more cyphers are added.
+The syntax is the same for each algrithm. It is subject to change as more cyphers are added. If the base `program.py` script is run without arguments it will guide you through the process of adding your custom properties.
 
 ```shell
 usage: program.py [-h] [-a ALGORITHM] [-e] [-d] [-m MESSAGE] ...
