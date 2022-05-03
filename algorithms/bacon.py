@@ -1,4 +1,3 @@
-from numpy import spacing
 from cryptark import Cryptark
 from log import log
 import re
