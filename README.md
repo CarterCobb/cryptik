@@ -59,6 +59,8 @@ RESULT: K-LLNOONE
 
 #### Encode
 
+Please see the documentation for each `encode` method in the algorithms folder for details on encode args.
+
 ```shell
 python program.py -a bacon -e -m "KILLNOONE" "did somebody say bacon? theres nothing more delicious."
 ```
