@@ -23,11 +23,12 @@ from art import *
 from log import log
 import argparse
 from algorithms.bacon import Bacon, NewBacon
+from algorithms.reverse import Reverse
 
 class Criptak:
 
     def __init__(self):
-        log.art(text2art('Cryptik  Cryptography  Helper', font='tarty1'))
+        log.art(text2art('Cryptik  Cryptography  Helper', font='cybermedium'))
         parser = argparse.ArgumentParser(description='Cryptik Cryptography Helper')
         parser.add_argument('-a', '--algo', dest='algorithm', default=None, type=str, help='Algoritm to use. e.g. bacon')
         parser.add_argument('-e', '--encode', dest='encode', default=None, action='store_true', help='Set wether the program encodes the message. default: False')
@@ -38,7 +39,7 @@ class Criptak:
         self.__dict__ = vars(args)
 
         get_algo = lambda: self.algorithm if self.algorithm is not None else inquirer.prompt([inquirer.List('algorithm', message='Choose an algorithm', choices=
-            ['bacon', 'new-bacon']
+            ['bacon', 'new-bacon', 'reverse']
         )])['algorithm']
         get_encode = lambda: self.encode if self.encode is not None else inquirer.confirm(message='Set to encode?')
         get_decode = lambda: self.decode if self.decode is not None else inquirer.confirm(message='Set to decode?')
@@ -55,8 +56,12 @@ class Criptak:
                 break
         self.message = get_message()
 
+        log.info("Using the following algorithm:")
+        log.algo(text2art(self.algorithm, font='tarty2'))
+
         if self.algorithm == 'bacon': self.algorithm = Bacon()
         elif self.algorithm == 'new-bacon': self.algorithm = NewBacon()
+        elif self.algorithm == 'reverse': self.algorithm = Reverse()
         else: raise RuntimeError(f'Algorithm `{self.algorithm}` not found')
 
         if self.encode: log.success(self.algorithm.encode(self.message, self.args))
