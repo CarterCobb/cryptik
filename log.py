@@ -29,6 +29,10 @@ class log:
         print(f'{Fore.CYAN}{message}', end=end)
 
     @classmethod
+    def algo(cls, message: str, end='\n'):
+        print(f'{Fore.MAGENTA}{message}', end=end)
+
+    @classmethod
     def warn(cls, message: str, end='\n'):
         print(f'{Fore.YELLOW}WARNING: {message}', end=end)
 
