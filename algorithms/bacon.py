@@ -15,8 +15,8 @@ class Bacon(Cryptark):
             @param: `encode_args[0]` = the string to encode the `message` into. e.g. "did somebody say bacon? there's nothing more delicious"
             @returns: from example: "dIdsOmEbodySaYbaCoNthEResnOThInGMoReDEliciOus"
         """
-        message = ''.join(filter(str.isalnum, message.replace(' ', ''))).upper()
-        encode_args[0] = ''.join(filter(str.isalnum, encode_args[0].replace(' ', ''))).lower()
+        message = ''.join(filter(str.isalnum, message)).upper()
+        encode_args[0] = ''.join(filter(str.isalnum, encode_args[0])).lower()
         if encode_args[0] is None: encode_args[0] = ''
         if len(message) * 5 != len(encode_args[0]): 
             log.warn(f'Message & hide string are invalid proportional sizes; {"truncating hide string" if (len(message) * 5 < len(encode_args[0])) else "adding extra character(s) to hide string."}') 
@@ -27,7 +27,7 @@ class Bacon(Cryptark):
         return ''.join([hide_str[i] if binary[i] != '1' else hide_str[i].upper() for i in range(len(binary))])
 
     def decode(self, message: str) -> str:
-        message = ''.join(filter(str.isalnum, message.replace(' ', '')))
+        message = ''.join(filter(str.isalnum, message))
         if len(message) % 5 != 0: log.warn('Message not divisible by 5; will be truncated.')
         log.general(re.findall('.....', message))
         pre_ascii = [int(v, 2) for v in [''.join(f) for f in [['0' if ord(l) > 90 else '1' for l in c] for c in re.findall('.....', message)]]]
@@ -47,8 +47,8 @@ class NewBacon(Cryptark):
             @param: `encode_args[0]` = the string to encode the `message` into. e.g. "did somebody say bacon? there's nothing more delicious"
             @returns: from example: "dIdSomEbodySaYBaCoNThEReSnOTHinGMOreDElIciOus"
         """
-        message = ''.join(filter(str.isalnum, message.replace(' ', ''))).upper()
-        encode_args[0] = ''.join(filter(str.isalnum, encode_args[0].replace(' ', ''))).lower()
+        message = ''.join(filter(str.isalnum, message)).upper()
+        encode_args[0] = ''.join(filter(str.isalnum, encode_args[0])).lower()
         if encode_args[0] is None: encode_args[0] = ''
         if len(message) * 5 != len(encode_args[0]): 
             log.warn(f'Message & hide string are invalid proportional sizes; {"truncating hide string" if (len(message) * 5 < len(encode_args[0])) else "adding extra character(s) to hide string."}') 
@@ -59,7 +59,7 @@ class NewBacon(Cryptark):
         return ''.join([hide_str[i] if binary[i] != '1' else hide_str[i].upper() for i in range(len(binary))])
 
     def decode(self, message: str) -> str:
-        message = ''.join(filter(str.isalnum, message.replace(' ', '')))
+        message = ''.join(filter(str.isalnum, message))
         if len(message) % 5 != 0: log.warn('Message not divisible by 5; will be truncated.')
         log.general(re.findall('.....', message))
         pre_ascii = [int(v, 2) for v in [''.join(f) for f in [['0' if ord(l) > 90 else '1' for l in c] for c in re.findall('.....', message)]]]
