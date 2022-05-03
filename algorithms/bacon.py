@@ -45,7 +45,7 @@ class NewBacon(Cryptark):
         """
             @param: `message` = the hidden message to encode. e.g: "KILL NO ONE"
             @param: `encode_args[0]` = the string to encode the `message` into. e.g. "did somebody say bacon? there's nothing more delicious"
-            @returns: from example: "dIdsOmEbodySaYbaCoNthEResnOThInGMoReDEliciOus"
+            @returns: from example: "dIdSomEbodySaYBaCoNThEReSnOTHinGMOreDElIciOus"
         """
         message = ''.join(filter(str.isalnum, message.replace(' ', ''))).upper()
         encode_args[0] = ''.join(filter(str.isalnum, encode_args[0].replace(' ', ''))).lower()
