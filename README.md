@@ -8,6 +8,7 @@ This is a simple cryptography encoder and decoder that will ahve various algorit
 | --------- |
 | Bacon's Cypher |
 | New Bacon's Cypher |
+| Reverse |
 
 ## Usage
 
