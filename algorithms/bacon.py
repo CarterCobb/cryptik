@@ -4,6 +4,10 @@ import re
 import random
 import string
 
+# 
+# Learn about this cypher: https://en.wikipedia.org/wiki/Bacon%27s_cipher
+# 
+
 class Bacon(Cryptark):
     """
     Original bacon Cypher
