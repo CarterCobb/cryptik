@@ -3,7 +3,7 @@ import sys
 import pprint
 
 pp = pprint.PrettyPrinter(indent=2)
-packages = ['inquirer','art','colorama','pyyaml']
+packages = ['inquirer','art','colorama','pyyaml', 'nltk']
 reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
 installed = [r.decode().split('==')[0].lower() for r in reqs.split()]
 to_install = set(packages) - set(installed)
