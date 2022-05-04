@@ -3,9 +3,9 @@ import sys
 import pprint
 
 pp = pprint.PrettyPrinter(indent=2)
-packages = ['inquirer','art', 'colorama']
+packages = ['inquirer','art','colorama','pyyaml']
 reqs = subprocess.check_output([sys.executable, '-m', 'pip', 'freeze'])
-installed = [r.decode().split('==')[0] for r in reqs.split()]
+installed = [r.decode().split('==')[0].lower() for r in reqs.split()]
 to_install = set(packages) - set(installed)
 
 if len(to_install) > 0:
@@ -24,6 +24,7 @@ from log import log
 import argparse
 from algorithms.bacon import Bacon, NewBacon
 from algorithms.reverse import Reverse
+from algorithms.concealment import Concealment
 
 class Criptak:
 
@@ -39,7 +40,7 @@ class Criptak:
         self.__dict__ = vars(args)
 
         get_algo = lambda: self.algorithm if self.algorithm is not None else inquirer.prompt([inquirer.List('algorithm', message='Choose an algorithm', choices=
-            ['bacon', 'new-bacon', 'reverse']
+            ['bacon', 'new-bacon', 'conceal' 'reverse']
         )])['algorithm']
         get_encode = lambda: self.encode if self.encode is not None else inquirer.confirm(message='Set to encode?')
         get_decode = lambda: self.decode if self.decode is not None else inquirer.confirm(message='Set to decode?')
@@ -62,6 +63,7 @@ class Criptak:
         if self.algorithm == 'bacon': self.algorithm = Bacon()
         elif self.algorithm == 'new-bacon': self.algorithm = NewBacon()
         elif self.algorithm == 'reverse': self.algorithm = Reverse()
+        elif self.algorithm == 'conceal': self.algorithm = Concealment()
         else: raise RuntimeError(f'Algorithm `{self.algorithm}` not found')
 
         if self.encode: log.success(self.algorithm.encode(self.message, self.args))
