@@ -9,7 +9,7 @@ import yaml
 class Concealment(Cryptark):
 
     def encode(self, message: str, encode_args) -> str:
-        # Use numpy to get words to generate sentences 
+        # Use nltk to get words to generate sentences 
         return super().encode(message, encode_args)
 
     def decode(self, message: str) -> str:
