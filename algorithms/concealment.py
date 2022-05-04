@@ -2,14 +2,47 @@ import json
 from cryptark import Cryptark
 from log import log
 import yaml
+from nltk.corpus import wordnet as wn
+import random
+import string
 
 class Concealment(Cryptark):
 
+    def __init__(self):
+        super().__init__()
+        self.words = [w for w in [word for synset in wn.all_synsets('n') for word in synset.lemma_names()] if w.find('_') == -1]
+
     def encode(self, message: str, encode_args) -> str:
-        # Use nltk to get words to generate sentences 
-        return super().encode(message, encode_args)
+        """
+            @param: `message` = the hidden message to encode. e.g: "KILL NO ONE"
+            @param: `encode_args[0]` = the concealment method to use. `last-char`, `stair`, `stair-reverse`, `stair-n`, `n-letter`, `helix`, `helix-joined`
+            @param: `encode_args[1]` = the offest if needed; optional if the concealment method does not need an offset.
+            @param: `encode_args[2]` = the `n` value for concealment methods that need it. optional
+            @returns: various concealment cyphers
+        """
+        try:
+            log.info(f'IN: {message}')
+            if encode_args[0] == 'last-char':
+                return ' '.join([self._choose_word(l, random.SystemRandom().randint(1, 10), True) for l in ''.join(filter(str.isalnum, message))])
+            elif encode_args[0] == 'stair':
+                return super().encode(message, encode_args) # TODO: implement
+            elif encode_args[0] == 'stair-reverse':
+                return super().encode(message, encode_args) # TODO: implement
+            elif encode_args[0] == 'stair-n':
+                return super().encode(message, encode_args) # TODO: implement
+            elif encode_args[0] == 'n-letter' and len(encode_args) == 3:
+                return super().encode(message, encode_args) # TODO: implement
+            elif encode_args[0] == 'n-letter':
+                return ' '.join([self._choose_word(l, int(encode_args[1]) - 1) for l in ''.join(filter(str.isalnum, message))])
+            elif encode_args[0] == 'helix':
+                return super().encode(message, encode_args) # TODO: implement
+            elif encode_args[0] == 'helix-joined':
+                return super().encode(message, encode_args) # TODO: implement
+            else: return f'concealment method not found: {encode_args[0]}'
+        except: log.error('Invalid arguments')
 
     def decode(self, message: str) -> str:
+        print(self._choose_word('c', 4))
         log.warn('Results varry and will output all possibliites in YAML format.')
         log.info(f'IN: {message}')
         return '\r\n' + yaml.dump({
@@ -88,6 +121,8 @@ class Concealment(Cryptark):
         b_helix = self._staircase_reverse(message)
         return ''.join([a_helix[i] + b_helix[i] for i in range(len(a_helix))])
 
+    # ---------------------------- ENCODE -----------------------------
+
     # ---------------------------- HELPERS ----------------------------
 
     def _safe_split(self, message) -> str:
@@ -95,3 +130,12 @@ class Concealment(Cryptark):
 
     def _min_word(self, message) -> str:
         return len(min(self._safe_split(message), key=len))
+
+    def _choose_word(self, letter, inx, l = None) -> str:
+        length_arr = [i for i in [i for i in self.words if len(i) == inx] if i.find(letter) == inx]
+        if len(length_arr) == 0: length_arr = [''.join(self._rand_ascii_char() for _ in range(inx)) + letter]
+        if l is not None and l: return random.SystemRandom().choice(length_arr)
+        return random.SystemRandom().choice([i for i in self.words if i.find(letter) == inx ])
+
+    def _rand_ascii_char(self) -> str:
+        return random.SystemRandom().choice(string.ascii_lowercase)
