@@ -5,8 +5,14 @@ import yaml
 from nltk.corpus import wordnet as wn
 import random
 import string
+import nltk
 
 class Concealment(Cryptark):
+
+    def __init__(self) -> None:
+        super().__init__()
+        nltk.download('wordnet')
+        nltk.download('omw-1.4')
 
     def encode(self, message: str, encode_args) -> str:
         """
@@ -65,7 +71,12 @@ class Concealment(Cryptark):
     def _n_offset(self, message): 
         message = ''.join(filter(str.isalnum, message))
         min_of, max_of = 0, len(message) - 1
-        res = []
+        res = [
+            {
+                'offest': 0,
+                'possibilities': [{'n': j - 1, 'res': message[::j]} for j in range(1, len(message))]
+            }
+        ]
         while min_of != max_of:
             for i in range(1, max_of):
                 res.append({
@@ -73,7 +84,7 @@ class Concealment(Cryptark):
                     'possibilities': [{'n': j - 1, 'res': message[i::j]} for j in range(1, len(message))]
                 })
             min_of += 1
-        with open('n_offest.json', 'w') as f: f.write(json.dumps(res))
+        with open('n_offest.json', 'w') as f: f.write(json.dumps(res, indent=3))
         return 'See output file `n_offset.json`'
 
     def _last_char(self, message) -> str:
