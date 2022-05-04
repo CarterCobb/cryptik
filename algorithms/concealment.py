@@ -9,11 +9,6 @@ import nltk
 
 class Concealment(Cryptark):
 
-    def __init__(self) -> None:
-        super().__init__()
-        nltk.download('wordnet')
-        nltk.download('omw-1.4')
-
     def encode(self, message: str, encode_args) -> str:
         """
             @param: `message` = the hidden message to encode. e.g: "KILL NO ONE"
@@ -22,6 +17,8 @@ class Concealment(Cryptark):
             @param: `encode_args[2]` = the `n` value for concealment methods that need it. optional
             @returns: various concealment cyphers
         """
+        nltk.download('wordnet')
+        nltk.download('omw-1.4')
         self.words = [w for w in [word for synset in wn.all_synsets('n') for word in synset.lemma_names()] if w.find('_') == -1]
         try:
             log.info(f'IN: {message}')
