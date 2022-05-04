@@ -8,10 +8,6 @@ import string
 
 class Concealment(Cryptark):
 
-    def __init__(self):
-        super().__init__()
-        self.words = [w for w in [word for synset in wn.all_synsets('n') for word in synset.lemma_names()] if w.find('_') == -1]
-
     def encode(self, message: str, encode_args) -> str:
         """
             @param: `message` = the hidden message to encode. e.g: "KILL NO ONE"
@@ -20,6 +16,7 @@ class Concealment(Cryptark):
             @param: `encode_args[2]` = the `n` value for concealment methods that need it. optional
             @returns: various concealment cyphers
         """
+        self.words = [w for w in [word for synset in wn.all_synsets('n') for word in synset.lemma_names()] if w.find('_') == -1]
         try:
             log.info(f'IN: {message}')
             if encode_args[0] == 'last-char':
@@ -42,7 +39,6 @@ class Concealment(Cryptark):
         except: log.error('Invalid arguments')
 
     def decode(self, message: str) -> str:
-        print(self._choose_word('c', 4))
         log.warn('Results varry and will output all possibliites in YAML format.')
         log.info(f'IN: {message}')
         return '\r\n' + yaml.dump({
