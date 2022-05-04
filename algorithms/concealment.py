@@ -1,5 +1,4 @@
 import json
-from turtle import back
 from cryptark import Cryptark
 from log import log
 import yaml
