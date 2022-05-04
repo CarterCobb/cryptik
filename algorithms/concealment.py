@@ -1,6 +1,4 @@
 import json
-import re
-import os
 from turtle import back
 from cryptark import Cryptark
 from log import log
