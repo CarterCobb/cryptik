@@ -44,7 +44,7 @@ class Concealment(Cryptark):
         while min_of != max_of:
             for i in range(1, max_of):
                 res.append({
-                    'offest': i - 1,
+                    'offest': i,
                     'possibilities': [{'n': j - 1, 'res': message[i::j]} for j in range(1, len(message))]
                 })
             min_of += 1
