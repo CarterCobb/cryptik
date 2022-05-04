@@ -63,8 +63,7 @@ class Concealment(Cryptark):
         log.warn(f'Smallest `n` length is {min_m}; will not calculate beyond that length')
         res = [{'n': i + 1, 'res': ''} for i in range(min_m)]
         for n in range(min_m):
-            for word in self._safe_split(message):
-                res[n]['res'] += word[n]
+            for word in self._safe_split(message): res[n]['res'] += word[n]
         return res
 
     def _n_offset(self, message): 
@@ -106,8 +105,7 @@ class Concealment(Cryptark):
     def _staticase_n_based(self, message):
         min_m = self._min_word(message)
         res = [{'n': i + 1, 'res': ''} for i in range(min_m)]
-        for n in range(min_m):
-            res[n]['res'] = self._staircase(message, n)
+        for n in range(min_m): res[n]['res'] = self._staircase(message, n)
         return res
 
     def _double_helix(self, message):
