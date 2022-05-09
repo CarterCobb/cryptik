@@ -25,6 +25,7 @@ import argparse
 from algorithms.bacon import Bacon, NewBacon
 from algorithms.reverse import Reverse
 from algorithms.concealment import Concealment
+from algorithms.transposition import Transposition
 
 class Criptak:
 
@@ -40,7 +41,7 @@ class Criptak:
         self.__dict__ = vars(args)
 
         get_algo = lambda: self.algorithm if self.algorithm is not None else inquirer.prompt([inquirer.List('algorithm', message='Choose an algorithm', choices=
-            ['bacon', 'new-bacon', 'conceal' 'reverse']
+            ['bacon', 'new-bacon', 'conceal' 'reverse', 'transposition']
         )])['algorithm']
         get_encode = lambda: self.encode if self.encode is not None else inquirer.confirm(message='Set to encode?')
         get_decode = lambda: self.decode if self.decode is not None else inquirer.confirm(message='Set to decode?')
@@ -64,10 +65,11 @@ class Criptak:
         elif self.algorithm == 'new-bacon': self.algorithm = NewBacon()
         elif self.algorithm == 'reverse': self.algorithm = Reverse()
         elif self.algorithm == 'conceal': self.algorithm = Concealment()
+        elif self.algorithm == 'transposition': self.algorithm = Transposition()
         else: raise RuntimeError(f'Algorithm `{self.algorithm}` not found')
 
         if self.encode: log.success(self.algorithm.encode(self.message, self.args))
-        elif self.decode: log.success(self.algorithm.decode(self.message))
+        elif self.decode: log.success(self.algorithm.decode(self.message, self.args))
         else: raise RuntimeError('Must specify encode or decode')
 
 if __name__ == '__main__': Criptak()
