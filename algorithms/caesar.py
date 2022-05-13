@@ -9,7 +9,7 @@ class Caesar(Cryptark):
         cipher = self._shift(alphabet, key)
         print(alphabet)
         print(cipher)
-        return ''.join([ cipher[alphabet.index(l)] for l in message])
+        return ''.join([cipher[alphabet.index(l)] for l in message])
 
     def decode(self, message: str, decode_args: list[str]) -> str:
         message = ''.join(filter(str.isalnum, message)).upper()
@@ -18,7 +18,7 @@ class Caesar(Cryptark):
         cipher = self._shift(alphabet, key)
         print(alphabet)
         print(cipher)
-        return ''.join([ alphabet[cipher.index(l)] for l in message])
+        return ''.join([alphabet[cipher.index(l)] for l in message])
 
     def _shift(self, seq, n):
         n = n % len(seq)
