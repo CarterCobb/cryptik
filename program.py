@@ -26,6 +26,7 @@ from algorithms.bacon import Bacon, NewBacon
 from algorithms.reverse import Reverse
 from algorithms.concealment import Concealment
 from algorithms.transposition import Transposition
+from algorithms.caesar import Caesar
 
 class Criptak:
 
@@ -41,7 +42,7 @@ class Criptak:
         self.__dict__ = vars(args)
 
         get_algo = lambda: self.algorithm if self.algorithm is not None else inquirer.prompt([inquirer.List('algorithm', message='Choose an algorithm', choices=
-            ['bacon', 'new-bacon', 'conceal' 'reverse', 'transposition']
+            ['bacon', 'new-bacon', 'conceal' 'reverse', 'transposition', 'caesar']
         )])['algorithm']
         get_encode = lambda: self.encode if self.encode is not None else inquirer.confirm(message='Set to encode?')
         get_decode = lambda: self.decode if self.decode is not None else inquirer.confirm(message='Set to decode?')
@@ -66,6 +67,7 @@ class Criptak:
         elif self.algorithm == 'reverse': self.algorithm = Reverse()
         elif self.algorithm == 'conceal': self.algorithm = Concealment()
         elif self.algorithm == 'transposition': self.algorithm = Transposition()
+        elif self.algorithm == 'caesar': self.algorithm = Caesar()
         else: raise RuntimeError(f'Algorithm `{self.algorithm}` not found')
 
         if self.encode: log.success(self.algorithm.encode(self.message, self.args))
