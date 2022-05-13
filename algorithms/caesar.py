@@ -20,6 +20,6 @@ class Caesar(Cryptark):
         key = int(args[0])
         alphabet = [chr(i + 65) for i in range(0,26)]
         cipher = self._shift(alphabet, key)
-        print('plain: ' if  t == 'encode' else 'cipher:', alphabet)
-        print('cipher:' if t == 'encode' else 'plain: ',cipher) 
+        print('plain: ', alphabet)
+        print('cipher:',cipher) 
         return alphabet, cipher
