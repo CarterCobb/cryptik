@@ -4,22 +4,22 @@ class Caesar(Cryptark):
 
     def encode(self, message: str, encode_args: list[str]) -> str:
         message = ''.join(filter(str.isalnum, message)).upper()
-        alphabet, cipher = self._main_logic(message, encode_args)
+        alphabet, cipher = self._main_logic('encode', encode_args)
         return ''.join([cipher[alphabet.index(l)] for l in message])
 
     def decode(self, message: str, decode_args: list[str]) -> str:
         message = ''.join(filter(str.isalnum, message)).upper()
-        alphabet, cipher = self._main_logic(message, decode_args)
+        alphabet, cipher = self._main_logic('decode', decode_args)
         return ''.join([alphabet[cipher.index(l)] for l in message])
 
     def _shift(self, seq, n):
         n = n % len(seq)
         return seq[n:] + seq[:n]
 
-    def _main_logic(self, message, args):
+    def _main_logic(self, t, args):
         key = int(args[0])
         alphabet = [chr(i + 65) for i in range(0,26)]
         cipher = self._shift(alphabet, key)
-        print(alphabet)
-        print(cipher) 
+        print('plain: ' if  t == 'encode' else 'cipher:', alphabet)
+        print('cipher:' if t == 'encode' else 'plain: ',cipher) 
         return alphabet, cipher
