@@ -9,14 +9,14 @@ class Caesar(Cryptark):
 
     def decode(self, message: str, decode_args: list[str]) -> str:
         message = ''.join(filter(str.isalnum, message)).upper()
-        alphabet, cipher = self._main_logic('decode', decode_args)
+        alphabet, cipher = self._main_logic('encode', decode_args)
         return ''.join([alphabet[cipher.index(l)] for l in message])
 
     def _shift(self, seq, n):
         n = n % len(seq)
         return seq[n:] + seq[:n]
 
-    def _main_logic(self, t, args):
+    def _main_logic(self, args):
         key = int(args[0])
         alphabet = [chr(i + 65) for i in range(0,26)]
         cipher = self._shift(alphabet, key)
