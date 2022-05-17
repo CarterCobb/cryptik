@@ -1,6 +1,17 @@
 from cryptark import Cryptark
 from log import log
 
+"""
+Key pairs:
+{1,1}
+{3,9}
+{5,21}
+{7,15}
+{11,19}
+{17,23}
+{25,25}
+"""
+
 class Multiplicative(Cryptark):
 
     def encode(self, message: str, encode_args: list[str]) -> str:
