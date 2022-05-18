@@ -1,7 +1,5 @@
-from audioop import mul
 from cryptark import Cryptark
 from log import log
-from algorithms.caesar import Caesar
 
 """
 Key pairs:
