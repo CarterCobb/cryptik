@@ -1,5 +1,9 @@
 from cryptark import Cryptark
+from functools import reduce
+from math import gcd
 import re
+from algorithms.frequency_analysis import FrequencyAnalysisSimple
+
 alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 letter_to_i = dict(zip(alphabet, range(len(alphabet))))
 i_to_letter = dict(zip(range(len(alphabet)), alphabet))
@@ -50,3 +54,33 @@ class Vigenere(Cryptark):
     def _join_spaces(self, space_indecies, text) -> str:
         for i in space_indecies: text = text[:i] + ' ' + text[i:]
         return text
+
+
+class HackVigenere(Cryptark): 
+
+    def encode(self, message: str, encode_args: list[str]) -> str:
+        return super().encode(message, encode_args)
+
+    def decode(self, message: str, decode_args: list[str]) -> str:
+        message = ''.join(filter(str.isalnum, message)).upper()
+        common_phrases = ['EFIQ', 'PSDLP', 'WCXYM', 'ETRL']
+        key_len = self._common_factor(common_phrases, message) 
+        chunked = [message[i:i + key_len] for i in range(0, len(message), key_len)]
+        for n in range(0, key_len):
+            FrequencyAnalysisSimple().analize(message[n::n + 1])
+        return super().decode(message, decode_args)
+
+    def _common_phrases(self, message) -> list[str]:
+        set_sizes = [4, 5, 6, 7, 8]
+        chunks = []
+        for offset in range(0, len(message)):
+            for s in set_sizes:
+                chunks = [message[i:i + s] for i in range(0, len(message), s)]
+                print(chunks)
+        pass
+
+    def _common_factor(self, common_phrases, message) -> int:
+        factors = [abs(reduce(lambda x, y: x - y, [i.start() for i in re.finditer(phrase, message)])) for phrase in common_phrases]
+        return reduce(gcd, factors)
+        
+            
