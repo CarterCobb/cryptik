@@ -39,8 +39,7 @@ class Vigenere(Cryptark):
         return f'DECODE->\r\nkey map: {key_set}\r\nplain:   {decripted}\r\ncipher:  {m_final}'
 
     def _find_spaces(self, message) -> list[int]:
-        spaces = [i.start() for i in re.finditer(' ', message)]
-        return spaces #[spaces[i] + i for i in range(0, len(spaces))]
+        return [i.start() for i in re.finditer(' ', message)]
 
     def _clean_text(self, text) -> str:
         return ''.join(filter(str.isalnum, text)).upper()
