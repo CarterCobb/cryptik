@@ -63,11 +63,16 @@ class HackVigenere(Cryptark):
 
     def decode(self, message: str, decode_args: list[str]) -> str:
         message = ''.join(filter(str.isalnum, message)).upper()
-        common_phrases = ['EFIQ', 'PSDLP', 'WCXYM', 'ETRL']
+        common_phrases = ['UFEIUJPGP', 'PLRLFSFNPB', 'VZUL', 'JPGP']
         key_len = self._common_factor(common_phrases, message) 
+        print(key_len)
         chunked = [message[i:i + key_len] for i in range(0, len(message), key_len)]
         for n in range(0, key_len):
-            FrequencyAnalysisSimple().analize(message[n::n + 1])
+            msg = ''
+            try:
+                for chunk in chunked: msg += chunk[n]
+            except: pass
+            FrequencyAnalysisSimple().analize(msg)
         return super().decode(message, decode_args)
 
     def _common_phrases(self, message) -> list[str]:
@@ -80,7 +85,8 @@ class HackVigenere(Cryptark):
         pass
 
     def _common_factor(self, common_phrases, message) -> int:
-        factors = [abs(reduce(lambda x, y: x - y, [i.start() for i in re.finditer(phrase, message)])) for phrase in common_phrases]
+        factors = [abs(reduce(lambda x, y: x - y, [i.start() for i in re.finditer(phrase, message)][:2])) for phrase in common_phrases]
+        print(factors)
         return reduce(gcd, factors)
         
             
