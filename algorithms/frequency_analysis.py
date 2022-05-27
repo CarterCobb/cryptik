@@ -53,9 +53,8 @@ class FrequencyAnalysis(Cryptark):
 
 class FrequencyAnalysisSimple:
 
-    def analize(self, message):
+    def get_frequencies(self, message):
         message = ''.join(re.sub(r'[^a-zA-Z\s]', u'', message, flags=re.UNICODE).upper().splitlines()) 
-        print(f'\r\n{message}')
         alpha_map = [{f'{chr(i + 65)}': {'count': 0, 'percent': 0}} for i in range(0, 26)]
         for l in message:
             if not l.isspace():
@@ -65,10 +64,5 @@ class FrequencyAnalysisSimple:
                 alpha_map[i][l]['count'] = alpha_map[i][l]['count'] + 1
                 alpha_map[i][l]['percent'] = (alpha_map[i][l]['count'] / len(message)) * 100
         res = sorted(alpha_map, key = lambda i: list(i.values())[0]['count'], reverse=True)
-        final_map = [list(i.keys())[0] for i in res]
-        # print(' '.join(final_map))
-        # print(f"{' '.join(WEIGHTS)}\r\n{' '.join(final_map)}")
-        letter_map = dict(zip(WEIGHTS, final_map)) 
-        sorted_letter_map = {key:letter_map[key] for key in sorted(letter_map)}
-        print(f"plain:  {' '.join(sorted_letter_map.keys())}\r\ncipher: {' '.join([sorted_letter_map[i] for i in sorted_letter_map.keys()])}")
-        
+        f_mapped = [v for v in {list(k.keys())[0]: k[list(k.keys())[0]]['percent'] for k in alpha_map}.values()]
+        return alpha_map, res[0][list(res[0].keys())[0]]['percent'], list(res[0].keys())[0], f_mapped
