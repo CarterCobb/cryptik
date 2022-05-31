@@ -1,0 +1,88 @@
+Rivest
+Shamir
+Adelman
+
+
+RSA Cipher
+
+BOB                     ALICE
+            EVE
+
+
+Public Key:  Everyone can see
+Private Key: Held only by the person decriping the message
+
+Asymetrical keys: different from one another
+
+mods
+
+Kohler's public key: in the anouncments
+
+(Chapter 14 - criptomath (mod inverse))
+(Chapter 23, 24 - (RSA keys))
+
+
+
+Example:
+
+bob:   7^x1 mod 11
+alice: 7^x2 mod 11
+
+
+    BOB           ALICE
+‾‾‾‾‾‾‾‾‾‾‾‾‾|‾‾‾‾‾‾‾‾‾‾‾‾‾‾
+ 10          | 2
+
+
+2^x1 mod 11 = 
+
+10^x2 mod 11 = 
+
+
+z^n mod x
+
+Encrypt:
+z,n,x
+
+z = base
+n = exponent
+x = mod
+
+Decrypt:
+z = public
+
+relativly prime = no common factors
+
+--------------------------Example:----------------------------
+
+#yo_homie
+
+# (35)(256^0)  = 35
+Y (89)(256^1)  = 22784
+o (111)(256^2) = 7274496
+_ (95)(256^3)  = 1593835520
+H (72)(256^4)  = 
+o (111)(256^5)
+m (109)(256^6)
+i (105)(256^7)
+e (101)(256^8)
+
+ Sum L60,L68   = 
+
+--------------------------Logic:----------------------------
+1) Generate the public key:
+    - generate large random prime number (p)
+    - generate large random prime number (q)
+        - p * q = N 
+
+2) Generate (e); relativly prime to (p-1) * (q - 1)
+    - PUBLIC_KEY = (N,e)
+
+3) Convert message to ASCII block sum
+    - block size = 128 (1024 bits) -> each block is 128 characters (loop each block of 128 charactes)
+    - byte size = 256
+
+4) Create a number called (d)
+    - mod inverse of (e)
+        - orin mod[(p-1)(q-1)]
+    PRIVATE_KEY = (N,d)
