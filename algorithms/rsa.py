@@ -2,7 +2,7 @@ from cryptark import Cryptark
 from algorithms.helpers.rabinmiller import generate_large_prime
 from algorithms.helpers.math import mod_inverse
 from math import gcd
-import sys, os, random
+import os, random
 from log import log
 
 DEFAULT_BLOCK_SIZE = 128 # 1024 bits
