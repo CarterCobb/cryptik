@@ -68,7 +68,7 @@ class HackVigenere(Cryptark):
 
     def decode(self, message: str, decode_args: list[str]) -> str:
         message = ''.join(filter(str.isalnum, message)).upper()
-        common_phrases = ['UFEIUJPGP', 'PLRLFSFNPB', 'VZUL', 'JPGP']
+        common_phrases = ['STBZGJ', 'PWHFMP', 'MNZTB', 'TRDIFWTVCGHD', 'WTFM', 'GTPPYHSZNTJ']
         key_len = self._common_factor(common_phrases, message)
         possible_letters = []
         print('Key length:',key_len)
