@@ -10,6 +10,12 @@ This is a simple cryptography encoder and decoder that will ahve various algorit
 | New Bacon's Cypher |
 | Various Concealment Cyphers see [here](https://github.com/CarterCobb/cryptik/blob/master/algorithms/concealment.py) |
 | Reverse |
+| Frequency Analysis |
+| Multiplicative |
+| RSA |
+| Transposition Cypher |
+| Vigenere Cypher |
+
 
 ## Usage
 
